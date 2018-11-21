@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Producto;
 use App\Http\Resources\Producto\ProductoResource;
+use App\Http\Resources\Producto\ProductoCollection;
 
 class ProductoController extends Controller
 {
@@ -15,7 +16,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        return Producto::all();
+        return ProductoCollection::collection(Producto::all());
     }
 
     /**

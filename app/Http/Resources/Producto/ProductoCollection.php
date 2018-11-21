@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources\Producto;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\Resource;
 
-class ProductoCollection extends ResourceCollection
+class ProductoCollection extends Resource
 {
     /**
      * Transform the resource collection into an array.
@@ -14,6 +14,13 @@ class ProductoCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'nombre' => $this->nombre,
+            'precioTotal' => round(((1 - ($this->descuento/100)) * $this->precio), 2),
+            'clasificacion' => $this->resenia->count() > 0 ? round($this->resenia->sum('estrella')/$this->resenia->count(),2) : 'No tiene clasificacion',
+            'href' => [
+                'enlace' => route('productos.show', $this->id)
+            ]
+        ];
     }
 }

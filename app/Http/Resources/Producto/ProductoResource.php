@@ -19,8 +19,13 @@ class ProductoResource extends JsonResource
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
             'precio' => $this->precio,
-            'inventario' => $this->inventario,
+            'inventario' => $this->inventario > 0 ? $this->inventario : 'No hay inventario',
             'descuento' => $this->descuento,
+            'precioTotal' => round(((1 - ($this->descuento/100)) * $this->precio), 2),
+            'clasificacion' => $this->resenia->count() > 0 ? round($this->resenia->sum('estrella')/$this->resenia->count(),2) : 'No tiene clasificacion',
+            'href' => [
+                'resenias' => route('resenias.index', $this->id)
+            ]
         ];
     }
 }
