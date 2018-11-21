@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Producto;
+use App\Http\Requests\ProductoRequest;
 use App\Http\Resources\Producto\ProductoResource;
 use App\Http\Resources\Producto\ProductoCollection;
 
 class ProductoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index', 'show');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,9 +41,19 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductoRequest $request)
     {
-        //
+        $producto = new Producto;
+        $producto->nombre = $request->nombre;
+        $producto->descripcion = $request->descripcion;
+        $producto->precio = $request->precio;
+        $producto->inventario = $request->inventario;
+        $producto->descuento = $request->descuento;
+        $producto->save();
+
+        return response()->json([
+            'data' => new ProductoResource($producto)
+        ], 201);
     }
 
     /**
