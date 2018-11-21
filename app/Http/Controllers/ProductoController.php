@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Producto;
+use App\Http\Resources\Producto\ProductoResource;
 
 class ProductoController extends Controller
 {
@@ -13,7 +15,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        return Producto::all();
     }
 
     /**
@@ -43,9 +45,9 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Producto $producto)
     {
-        //
+        return new ProductoResource($producto);
     }
 
     /**
