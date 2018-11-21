@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Resenia;
+use App\Producto;
+use App\Http\Resources\Resenia\ReseniaResource;
 
 class ReseniaController extends Controller
 {
@@ -11,9 +14,9 @@ class ReseniaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Producto $producto)
     {
-        //
+        return ReseniaResource::collection($producto->resenia);
     }
 
     /**
