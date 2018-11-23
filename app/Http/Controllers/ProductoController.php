@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Producto;
+use Illuminate\Http\Response;
 use App\Http\Requests\ProductoRequest;
 use App\Http\Resources\Producto\ProductoResource;
 use App\Http\Resources\Producto\ProductoCollection;
@@ -100,8 +101,10 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Producto $producto)
     {
-        //
+        $producto->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
