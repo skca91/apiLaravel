@@ -8,6 +8,8 @@ use Illuminate\Http\Response;
 use App\Http\Requests\ProductoRequest;
 use App\Http\Resources\Producto\ProductoResource;
 use App\Http\Resources\Producto\ProductoCollection;
+use App\Exceptions\ProductNotBelongsToUser;
+use Auth;
 
 class ProductoController extends Controller
 {
