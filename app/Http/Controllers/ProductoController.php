@@ -88,6 +88,8 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
+        $this->ProductUserAuth($producto);
+
         $producto->update($request->all());
 
          return response()->json([
@@ -103,8 +105,19 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+        $this->ProductUserAuth($producto);
+
         $producto->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function ProductUserAuth($product)
+    {
+        if(Auth::id() !== $product->user_id)
+        {
+            throw new ProductNotBelongsToUser;
+            
+        }
     }
 }

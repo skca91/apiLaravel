@@ -20,6 +20,7 @@ class CreateProductosTable extends Migration
             $table->integer('precio');
             $table->integer('inventario');
             $table->integer('descuento');
+            $table->integer('user_id')->unsigned()->index();
             $table->timestamps();
         });
     }

@@ -9,6 +9,10 @@ $factory->define(App\Producto::class, function (Faker $faker) {
         'precio' => $faker->numberBetween(100,10000),
         'inventario' => $faker->randomDigit,
         'descuento' => $faker->numberBetween(5,25),
+        'user_id' => function()
+        {
+        	return App\User::all()->random();
+        }
     ];
 });
 
