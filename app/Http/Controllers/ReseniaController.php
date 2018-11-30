@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Resenia;
 use App\Producto;
+use Illuminate\Http\Response;
 use App\Http\Resources\Resenia\ReseniaResource;
+use App\Http\Requests\ReseniaRequest;
 
 class ReseniaController extends Controller
 {
@@ -35,9 +37,14 @@ class ReseniaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReseniaRequest $request, Producto $producto)
     {
-        //
+        $resenia = new Resenia($request->all());
+        $producto->resenia()->save($resenia);
+
+        return response()->json([
+            'data' => new ReseniaResource($resenia)
+        ],Response::HTTP_CREATED);
     }
 
     /**
