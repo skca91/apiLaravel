@@ -76,9 +76,13 @@ class ReseniaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Producto $producto, Resenia $resenia)
     {
-        //
+        $resenia->update($request->all());
+
+        return response()->json([
+            'data' => new ReseniaResource($resenia)
+        ],Response::HTTP_CREATED);
     }
 
     /**
@@ -87,8 +91,10 @@ class ReseniaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Producto $producto, Resenia $resenia)
     {
-        //
+        $resenia->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

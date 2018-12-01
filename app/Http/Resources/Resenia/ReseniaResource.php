@@ -15,6 +15,7 @@ class ReseniaResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'cliente' => $this->cliente,
             'mensaje' => $this->resenia,
             'estrella' => $this->estrella,
