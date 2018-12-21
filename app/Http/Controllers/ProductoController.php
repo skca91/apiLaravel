@@ -55,7 +55,7 @@ class ProductoController extends Controller
         $producto->save();
 
         return response()->json([
-            'data' => new ProductoResource($producto)
+            'guardar' => new ProductoResource($producto)
         ], 201);
     }
 
