@@ -2372,7 +2372,7 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v4.1.7",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
@@ -2443,7 +2443,7 @@
                 "psr/log": "~1.0",
                 "symfony/debug": "~3.4|~4.0",
                 "symfony/event-dispatcher": "~4.1",
-                "symfony/http-foundation": "^4.1.1",
+                "symfony/http-foundation": "^4.4.2",
                 "symfony/polyfill-ctype": "~1.8"
             },
             "conflict": {
