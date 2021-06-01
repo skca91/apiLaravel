@@ -10,6 +10,7 @@ use App\Http\Resources\Producto\ProductoResource;
 use App\Http\Resources\Producto\ProductoCollection;
 use App\Exceptions\ProductNotBelongsToUser;
 use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class ProductoController extends Controller
 {
@@ -116,7 +117,7 @@ class ProductoController extends Controller
 
     public function ProductUserAuth($product)
     {
-        if(Auth::id() !== $product->user_id)
+        if(FacadesAuth::id() !== $product->user_id)
         {
             throw new ProductNotBelongsToUser;
             
