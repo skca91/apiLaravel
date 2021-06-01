@@ -1,0 +1,371 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Productos",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000"
+        }
+    ],
+    "paths": {
+        "/api/productos": {
+            "get": {
+                "tags": [
+                    "Listado Productos"
+                ],
+                "summary": "Lista todos los productos",
+                "operationId": "App\\Http\\Controllers\\ProductoController::index",
+                "responses": {
+                    "200": {
+                        "description": "Muestra todos lo productos"
+                    },
+                    "404": {
+                        "description": "No hay productos guardados"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Guarda un nuevo Producto"
+                ],
+                "summary": "Guarda un nuevo producto",
+                "operationId": "App\\Http\\Controllers\\ProductoController::store",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "path",
+                        "description": "Nombre del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "descripcion",
+                        "in": "path",
+                        "description": "Descripcion del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "precio",
+                        "in": "path",
+                        "description": "precio del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "inventario",
+                        "in": "path",
+                        "description": "Cantidad del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "descuento",
+                        "in": "path",
+                        "description": "Descuento del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Creado nuevo producto"
+                    }
+                }
+            }
+        },
+        "/api/productos/{id}": {
+            "get": {
+                "tags": [
+                    "Muestra un producto"
+                ],
+                "summary": "Muestra un producto especificado",
+                "operationId": "App\\Http\\Controllers\\ProductoController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Muestra el detalle del producto"
+                    },
+                    "404": {
+                        "description": "No se encuentra el producto especificado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Actualiza un producto"
+                ],
+                "summary": "Actualiza los datos de un producto",
+                "operationId": "App\\Http\\Controllers\\ProductoController::update",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "path",
+                        "description": "Nombre del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "descripcion",
+                        "in": "path",
+                        "description": "Descripcion del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "precio",
+                        "in": "path",
+                        "description": "precio del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "inventario",
+                        "in": "path",
+                        "description": "Cantidad del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "descuento",
+                        "in": "path",
+                        "description": "Descuento del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Actualizado producto"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Elimina un producto"
+                ],
+                "summary": "Elimina un producto especificado",
+                "operationId": "App\\Http\\Controllers\\ProductoController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Eliminado exitosamente"
+                    },
+                    "404": {
+                        "description": "No se encuentra el producto especificado"
+                    }
+                }
+            }
+        },
+        "/api/productos/{id}/resenias": {
+            "get": {
+                "tags": [
+                    "Lista todas las resenias de una producto"
+                ],
+                "summary": "Lista todas las resenias de un producto",
+                "operationId": "App\\Http\\Controllers\\ReseniaController::index",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Muestra todas las resenias de un producto"
+                    },
+                    "404": {
+                        "description": "No hay resenias"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Guarda una resenia para un producto"
+                ],
+                "summary": "Guarda una resenia para un producto",
+                "operationId": "App\\Http\\Controllers\\ReseniaController::store",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "cliente",
+                        "in": "path",
+                        "description": "Nombre del cliente",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "estrella",
+                        "in": "path",
+                        "description": "Cantidad de estrellas de la resenia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "resenia",
+                        "in": "path",
+                        "description": "Resenia del producto",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Creada nueva resenia para el producto producto"
+                    }
+                }
+            }
+        },
+        "/api/productos/{id}/resenias/{idr}": {
+            "put": {
+                "tags": [
+                    "Actualiza la resenia del producto"
+                ],
+                "summary": "Actualiza la resenia del producto",
+                "operationId": "App\\Http\\Controllers\\ReseniaController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "idr",
+                        "in": "path",
+                        "description": "Id de la resenia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "estrella",
+                        "in": "path",
+                        "description": "Cantidad de estrellas de la resenia",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "resenia",
+                        "in": "path",
+                        "description": "Resenia del producto",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Creada nueva resenia para el producto producto"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Elimina un producto especificado"
+                ],
+                "summary": "Elimina un producto especificado",
+                "operationId": "App\\Http\\Controllers\\ReseniaController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "idr",
+                        "in": "path",
+                        "description": "ID de la resenia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Eliminado exitosamente"
+                    },
+                    "404": {
+                        "description": "No se encuentra el producto especificado"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

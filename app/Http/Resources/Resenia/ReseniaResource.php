@@ -12,6 +12,9 @@ class ReseniaResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
+    public static $wrap = 'resenia';
+
     public function toArray($request)
     {
         return [

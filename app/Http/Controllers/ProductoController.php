@@ -12,6 +12,12 @@ use App\Exceptions\ProductNotBelongsToUser;
 use Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
+/**
+* @OA\Info(title="API Productos", version="1.0")
+*
+* @OA\Server(url="http://127.0.0.1:8000")
+*/
+
 class ProductoController extends Controller
 {
 
@@ -19,32 +25,84 @@ class ProductoController extends Controller
     {
         $this->middleware('auth:api')->except('index', 'show');
     }
+ 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(
+    *     path="/api/productos",
+    *     summary="Lista todos los productos",
+    *     tags={"Listado Productos"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="Muestra todos lo productos"
+    *     ),
+    *     @OA\Response(
+    *         response="404",
+    *         description="No hay productos guardados"
+    *     ),
+    * )
+    */
     public function index()
     {
         return ProductoCollection::collection(Producto::paginate(5));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+/**
+    * @OA\Post(
+    *     path="/api/productos",
+    *     summary="Guarda un nuevo producto",
+    *     tags={"Guarda un nuevo Producto"},
+     *  
+     *   @OA\Parameter(
+     *      name="nombre",
+     *      in="path",
+     *      description="Nombre del producto",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  *   @OA\Parameter(
+     *      name="descripcion",
+     *      in="path",
+     *      description="Descripcion del producto",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  *   @OA\Parameter(
+     *      name="precio",
+     *      in="path",
+     *      description="precio del producto",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *  *   @OA\Parameter(
+     *      name="inventario",
+     *      in="path",
+     *      description="Cantidad del producto",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *  *   @OA\Parameter(
+     *      name="descuento",
+     *      in="path",
+     *      description="Descuento del producto",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *     @OA\Response(
+    *         response="201",
+    *         description="Creado nuevo producto"
+    *     ),
+    * )
+    */
     public function store(ProductoRequest $request)
     {
         $producto = new Producto;
@@ -60,35 +118,93 @@ class ProductoController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+     /**
+    * @OA\Get(
+    *     path="/api/productos/{id}",
+    *     summary="Muestra un producto especificado",
+    *     tags={"Muestra un producto"},
+    *      @OA\Parameter(
+     *      name="id",
+     *      in="path",
+     *      description="ID del producto",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Muestra el detalle del producto"
+    *     ),
+    *     @OA\Response(
+    *         response="404",
+    *         description="No se encuentra el producto especificado"
+    *     ),
+    * )
+    */
     public function show(Producto $producto)
     {
         return new ProductoResource($producto);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   /**
+    * @OA\Put(
+    *     path="/api/productos/{id}",
+    *     summary="Actualiza los datos de un producto",
+    *     tags={"Actualiza un producto"},
+     *  
+     *   @OA\Parameter(
+     *      name="nombre",
+     *      in="path",
+     *      description="Nombre del producto",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  *   @OA\Parameter(
+     *      name="descripcion",
+     *      in="path",
+     *      description="Descripcion del producto",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  *   @OA\Parameter(
+     *      name="precio",
+     *      in="path",
+     *      description="precio del producto",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *  *   @OA\Parameter(
+     *      name="inventario",
+     *      in="path",
+     *      description="Cantidad del producto",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *  *   @OA\Parameter(
+     *      name="descuento",
+     *      in="path",
+     *      description="Descuento del producto",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *     @OA\Response(
+    *         response="201",
+    *         description="Actualizado producto"
+    *     ),
+    * )
+    */
     public function update(Request $request, Producto $producto)
     {
         $this->ProductUserAuth($producto);
@@ -100,12 +216,30 @@ class ProductoController extends Controller
         ], 201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+     /**
+    * @OA\Delete(
+    *     path="/api/productos/{id}",
+    *     summary="Elimina un producto especificado",
+    *     tags={"Elimina un producto"},
+    *      @OA\Parameter(
+     *      name="id",
+     *      in="path",
+     *      description="ID del producto",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Eliminado exitosamente"
+    *     ),
+    *     @OA\Response(
+    *         response="404",
+    *         description="No se encuentra el producto especificado"
+    *     ),
+    * )
+    */
     public function destroy(Producto $producto)
     {
         $this->ProductUserAuth($producto);
@@ -114,6 +248,7 @@ class ProductoController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
 
     public function ProductUserAuth($product)
     {
