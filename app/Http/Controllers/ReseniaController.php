@@ -95,7 +95,7 @@ class ReseniaController extends Controller
         $producto->resenia()->save($resenia);
 
         return response()->json([
-            'data' => new ReseniaResource($resenia)
+            'guardar' => new ReseniaResource($resenia)
         ],Response::HTTP_CREATED);
     }
 
@@ -150,9 +150,7 @@ class ReseniaController extends Controller
     {
         $resenia->update($request->all());
 
-        return response()->json([
-            'data' => new ReseniaResource($resenia)
-        ],Response::HTTP_CREATED);
+        return  new ReseniaResource($resenia);
     }
 
 

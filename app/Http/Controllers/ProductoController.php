@@ -43,7 +43,10 @@ class ProductoController extends Controller
     */
     public function index()
     {
-        return ProductoCollection::collection(Producto::paginate(5));
+
+        $productos = Producto::all();
+
+        return ProductoCollection::collection($productos);
     }
 
 /**
@@ -114,7 +117,7 @@ class ProductoController extends Controller
         $producto->save();
 
         return response()->json([
-            'guardar' => new ProductoResource($producto)
+            'producto' => new ProductoResource($producto)
         ], 201);
     }
 
@@ -211,9 +214,7 @@ class ProductoController extends Controller
 
         $producto->update($request->all());
 
-         return response()->json([
-            'data' => new ProductoResource($producto)
-        ], 201);
+         return new ProductoResource($producto);
     }
 
      /**

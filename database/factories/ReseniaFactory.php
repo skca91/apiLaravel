@@ -1,16 +1,21 @@
 <?php
 
-use Faker\Generator as Faker;
-use App\Producto;
+namespace Database\Factories;
 
-$factory->define(App\Resenia::class, function (Faker $faker) {
-    return [
-        'cliente' => $faker->name,
-        'resenia' => $faker->paragraph,
-        'estrella' => $faker->numberBetween(0,5),
-        'producto_id' => function(){
+use App\Resenia;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-        	return Producto::all()->random();
-        }
-    ];
-});
+class ReseniaFactory extends Factory
+{
+
+    protected $model = Resenia::class;
+
+    public function definition()  {
+        return [
+            'cliente' =>  $this->faker->name,
+            'resenia' =>  $this->faker->paragraph,
+            'estrella' =>  $this->faker->numberBetween(0,5),
+            'producto_id' => 2
+        ];
+    }
+}

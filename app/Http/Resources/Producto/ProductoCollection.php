@@ -12,7 +12,7 @@ class ProductoCollection extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public static $wrap = 'productos';
+    //public static $wrap = 'productos';
 
     public function toArray($request)
     {

@@ -1,6 +1,9 @@
 <?php
 
+use App\Producto;
 use Illuminate\Database\Seeder;
+use App\User;
+use App\Resenia;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,8 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        factory(App\User::class, 10)->create();
-        factory(App\Producto::class, 50)->create();
-        factory(App\Resenia::class, 200)->create();
+        User::factory()->count(10)->create();
+        Producto::factory()->count(50)->create();
+        Resenia::factory()->count(200)->create();
     }
 }
