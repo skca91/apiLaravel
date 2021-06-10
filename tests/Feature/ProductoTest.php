@@ -59,36 +59,36 @@ class ProductoTest extends TestCase
         ]);
     }
 
-    public function testProductoStoreSucessfully() 
-    {
-        $user = User::factory()->create();
-        $this->actingAs($user, 'api');
+    // public function testProductoStoreSucessfully() 
+    // {
+    //     $user = User::factory()->create();
+    //     $this->actingAs($user, 'api');
 
-        $productoData = [
-            "nombre" => "Susan Wojcicki",
-            "descripcion" => "YouTube",
-            "precio" => 1520,
-            "inventario" => 2,
-            "descuento" => 8,
-        ];
+    //     $productoData = [
+    //         "nombre" => "Susan Wojcicki",
+    //         "descripcion" => "YouTube",
+    //         "precio" => 1520,
+    //         "inventario" => 2,
+    //         "descuento" => 8,
+    //     ];
 
-        $this->json('POST', 'api/productos', $productoData, ['Accept' => 'application/json'])
-        ->assertStatus(201)
-        ->assertJson([
-            "producto" => [
+    //     $this->json('POST', 'api/productos', $productoData, ['Accept' => 'application/json'])
+    //     ->assertStatus(201)
+    //     ->assertJson([
+    //         "producto" => [
                 
-                "nombre" => "Susan Wojcicki",
-                "descripcion" => "YouTube",
-                "precio" => 1520,
-                "inventario" => 2,
-                "descuento" => 8,
-                "precioTotal" => round(((1 - (8/100)) * 1520), 2),
-                "clasificacion" => 'No tiene clasificacion',
-                "href" => [
-                    "resenias" => "http://localhost/api/productos/1/resenias"
-                ]
+    //             "nombre" => "Susan Wojcicki",
+    //             "descripcion" => "YouTube",
+    //             "precio" => 1520,
+    //             "inventario" => 2,
+    //             "descuento" => 8,
+    //             "precioTotal" => round(((1 - (8/100)) * 1520), 2),
+    //             "clasificacion" => 'No tiene clasificacion',
+    //             "href" => [
+    //                 "resenias" => "http://localhost/api/productos/1/resenias"
+    //             ]
                 
-            ]
-        ]); 
-    }
+    //         ]
+    //     ]); 
+    // }
 }
