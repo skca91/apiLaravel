@@ -15,11 +15,11 @@ class ReseniaController extends Controller
     
      /**
     * @OA\Get(
-    *     path="/api/productos/{id}/resenias",
+    *     path="/api/productos/{producto}/resenias",
     *     summary="Lista todas las resenias de un producto",
     *     tags={"Lista todas las resenias de una producto"},
     *     @OA\Parameter(
-     *      name="id",
+     *      name="producto",
      *      in="path",
      *      description="Id del producto",
      *      required=true,
@@ -44,11 +44,11 @@ class ReseniaController extends Controller
 
    /**
     * @OA\Post(
-    *     path="/api/productos/{id}/resenias",
+    *     path="/api/productos/{producto}/resenias",
     *     summary="Guarda una resenia para un producto",
     *     tags={"Guarda una resenia para un producto"},
      *   @OA\Parameter(
-     *      name="id",
+     *      name="producto",
      *      in="path",
      *      description="Id del producto",
      *      required=true,
@@ -75,7 +75,7 @@ class ReseniaController extends Controller
      *      )
      *   ),
      *  *   @OA\Parameter(
-     *      name="resenia",
+     *      name="resenias",
      *      in="path",
      *      description="Resenia del producto",
      *      required=false,
@@ -91,8 +91,15 @@ class ReseniaController extends Controller
     */
     public function store(ReseniaRequest $request, Producto $producto)
     {
-        $resenia = new Resenia($request->all());
-        $producto->resenia()->save($resenia);
+        $resenia = new Resenia();
+        $resenia->cliente = $request->cliente;
+        $resenia->resenia = $request->resenia;
+        $resenia->estrella = $request->estrella;
+        $resenia->producto_id = $request->producto_id;
+        $resenia->save();
+
+        
+        //$producto->resenia()->save($resenia);
 
         return response()->json([
             'guardar' => new ReseniaResource($resenia)
@@ -101,11 +108,11 @@ class ReseniaController extends Controller
 
   /**
     * @OA\Put(
-    *     path="/api/productos/{id}/resenias/{idr}",
+    *     path="/api/productos/{producto}/resenias/{resenia}",
     *     summary="Actualiza la resenia del producto",
     *     tags={"Actualiza la resenia del producto"},
      *   @OA\Parameter(
-     *      name="id",
+     *      name="producto",
      *      in="path",
      *      description="Id del producto",
      *      required=true,
@@ -114,7 +121,7 @@ class ReseniaController extends Controller
      *      )
      *   ),
      *  @OA\Parameter(
-     *      name="idr",
+     *      name="resenia",
      *      in="path",
      *      description="Id de la resenia",
      *      required=true,
@@ -132,7 +139,7 @@ class ReseniaController extends Controller
      *      )
      *   ),
      *  *   @OA\Parameter(
-     *      name="resenia",
+     *      name="resenias",
      *      in="path",
      *      description="Resenia del producto",
      *      required=false,
@@ -146,11 +153,11 @@ class ReseniaController extends Controller
     *     ),
     * )
     */
-    public function update(Request $request,Producto $producto, Resenia $resenia)
+    public function update(Request $request, Producto $producto, Resenia $resenia)
     {
         $resenia->update($request->all());
 
-        return  new ReseniaResource($resenia);
+        return new ReseniaResource($resenia);
     }
 
 
