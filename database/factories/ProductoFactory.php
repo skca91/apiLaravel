@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Producto;
+use App\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -18,7 +19,7 @@ class ProductoFactory extends Factory
             'precio' => $this->faker->numberBetween(100,10000),
             'inventario' => $this->faker->randomDigit,
             'descuento' => $this->faker->numberBetween(5,25),
-            'user_id' => 1
+            'user_id' => User::inRandomOrder()->value('id')
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Resenia;
+use App\Producto;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReseniaFactory extends Factory
@@ -15,7 +16,7 @@ class ReseniaFactory extends Factory
             'cliente' =>  $this->faker->name,
             'resenia' =>  $this->faker->paragraph,
             'estrella' =>  $this->faker->numberBetween(0,5),
-            'producto_id' => 2
+            'producto_id' => Producto::inRandomOrder()->value('id')
         ];
     }
 }

@@ -21,10 +21,10 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 class ProductoController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:api')->except('index', 'show');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index', 'show');
+    }
  
     /**
     * @OA\Get(
@@ -108,6 +108,7 @@ class ProductoController extends Controller
     */
     public function store(ProductoRequest $request)
     {
+        
         $producto = new Producto;
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
