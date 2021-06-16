@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\Producto;
-use App\Models\User;
-use App\Models\Resenia;
+use App\Producto;
+use App\User;
+use App\Resenia;
 use Tests\TestCase;
 
 class ProductoTest extends TestCase

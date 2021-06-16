@@ -4,9 +4,9 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use App\Models\Producto;
-use App\Models\Resenia;
-use App\Models\User;
+use App\Producto;
+use App\Resenia;
+use App\User;
 
 use Tests\TestCase;
 
@@ -98,7 +98,7 @@ class ReseniaTest extends TestCase
             'estrella' =>  5,
         ];
 
-        $this->json("PUT", route("resenias.update", $resenia->id), $reseniaUpdate)
+        $this->json("PUT", "http://127.0.0.1:8000/api/productos/".$producto->id."/resenias/".$resenia->id, $reseniaUpdate)
         ->assertStatus(200);
 
     }
@@ -122,8 +122,8 @@ class ReseniaTest extends TestCase
             "producto_id" => $producto->id,
         ]);  
         
-        $this->delete(route("resenias.destroy", $resenia->id))
-        ->assertStatus(200);
+        $this->delete("http://127.0.0.1:8000/api/productos/".$producto->id."/resenias/".$resenia->id)
+        ->assertStatus(204);
 
     }
 

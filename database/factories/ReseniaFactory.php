@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Resenia;
-use App\Models\Producto;
+use App\Resenia;
+use App\Producto;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReseniaFactory extends Factory
