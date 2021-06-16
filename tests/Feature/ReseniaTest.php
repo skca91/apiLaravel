@@ -4,9 +4,9 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use App\Producto;
-use App\Resenia;
-use App\User;
+use App\Models\Producto;
+use App\Models\Resenia;
+use App\Models\User;
 
 use Tests\TestCase;
 
@@ -99,6 +99,30 @@ class ReseniaTest extends TestCase
         ];
 
         $this->json("PUT", route("resenias.update", $resenia->id), $reseniaUpdate)
+        ->assertStatus(200);
+
+    }
+
+    public function test_resenia_can_delete(){
+
+        $producto = Producto::factory()->create([
+            'nombre' => 'Shampoo',
+            'descripcion' => 'NUevo shampoo',
+            'precio' => 100,
+            'inventario' => 12,
+            'descuento' => 5,
+            'user_id' => $this->user->id
+        ]);
+        
+        $resenia = Resenia::factory()->create([
+                    
+            "cliente" =>  "Maria",
+            "resenia" =>  "buen producto",
+            "estrella" =>  4,
+            "producto_id" => $producto->id,
+        ]);  
+        
+        $this->delete(route("resenias.destroy", $resenia->id))
         ->assertStatus(200);
 
     }

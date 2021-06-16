@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Resenia;
-use App\Producto;
+use App\Models\Resenia;
+use App\Models\Producto;
 use Illuminate\Http\Response;
 use App\Http\Resources\Resenia\ReseniaResource;
 use App\Http\Requests\ReseniaRequest;
