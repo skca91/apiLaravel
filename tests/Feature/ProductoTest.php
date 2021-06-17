@@ -38,7 +38,7 @@ class ProductoTest extends TestCase
             "user_id" => $this->user->id
         ]);
 
-        $this->json('GET', route("productos.index"), ['Accept' => 'application/json'])
+        $this->json('GET', "http://127.0.0.1:8000/api/productos", ['Accept' => 'application/json'])
         ->assertStatus(200)
         ->assertJson([
             "data" => [
@@ -47,7 +47,7 @@ class ProductoTest extends TestCase
                     'precioTotal' => 920,
                     'clasificacion' => 'No tiene clasificacion',
                     'href' => [
-                        'enlace' => route('productos.show', 1)
+                        'enlace' => "http://127.0.0.1:8000/api/productos/1"
                     ]
                 ],
                 [
@@ -55,7 +55,7 @@ class ProductoTest extends TestCase
                     'precioTotal' => 90,
                     'clasificacion' => 'No tiene clasificacion',
                     'href' => [
-                        'enlace' => route('productos.show', 2)
+                        'enlace' => "http://127.0.0.1:8000/api/productos/2"
                     ]
                 ]
             ]
@@ -74,7 +74,7 @@ class ProductoTest extends TestCase
             "user_id" => $this->user->id
         ];
 
-        $this->json('POST', route("productos.store"), $productoData, ['Accept' => 'application/json'])
+        $this->json('POST', "http://127.0.0.1:8000/api/productos", $productoData, ['Accept' => 'application/json'])
         ->assertStatus(201)
         ->assertJson([
             'producto' => [
@@ -104,7 +104,7 @@ class ProductoTest extends TestCase
 
 
         $this->withoutExceptionHandling();
-        $this->json("GET", route("productos.show", $producto->id))
+        $this->json("GET", "http://127.0.0.1:8000/api/productos/".$producto->id)
         ->assertStatus(200);
     }
 
@@ -122,7 +122,7 @@ class ProductoTest extends TestCase
             "user_id" => $this->user->id
         ]; 
         
-        $this->json("PUT", route("productos.update", $producto->id), $updateData)
+        $this->json("PUT", "http://127.0.0.1:8000/api/productos/".$producto->id, $updateData)
         ->assertStatus(200);
 
     }
@@ -131,7 +131,7 @@ class ProductoTest extends TestCase
 
         $producto = Producto::factory()->create();
 
-        $this->delete(route("productos.destroy", $producto->id))
+        $this->delete("http://127.0.0.1:8000/api/productos/".$producto->id)
         ->assertStatus(200);
     }
 

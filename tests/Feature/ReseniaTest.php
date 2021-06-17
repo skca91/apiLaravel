@@ -45,7 +45,7 @@ class ReseniaTest extends TestCase
         $producto->resenia()->save($resenia);
 
         $this->withoutExceptionHandling();
-        $this->json("GET", route("resenias.index", $producto->id))
+        $this->json("GET", "http://127.0.0.1:8000/api/productos/".$producto->id."/resenias")
         ->assertStatus(200);
     }
 
@@ -69,7 +69,7 @@ class ReseniaTest extends TestCase
 
         //$producto->resenia()->save($resenia);
         $this->withoutExceptionHandling();
-        $this->json('POST', route("resenias.store", $producto->id), $resenia)
+        $this->json('POST', "http://127.0.0.1:8000/api/productos/".$producto->id."/resenias", $resenia)
         ->assertStatus(201);
 
     }
